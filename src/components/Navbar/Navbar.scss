@@ -5,22 +5,35 @@
   padding: 1rem 2rem;
   background-color: var(--dark-bg);
   color: var(--light-font);
+  margin: 2rem;
+  border-radius: 25% 0 25% 0;
 
-  ul {
-    display: flex;
-    list-style: none;
-    column-gap: 2rem;
+  h1 {
+    background: var(--orange-100);
+    color: var(--dark-bg);
+    padding: 12px;
+    border-radius: 25% 0 25% 0;
+  }
+}
 
-    li {
-      cursor: pointer;
-      transition: all 0.3s ease;
+ul {
+  display: flex;
+  list-style: none;
+  column-gap: 2rem;
 
-      &:hover {
-        color: var(--orange-100);
-      }
-      &:active {
-        color: var(--orange-500);
-      }
+  li {
+    background: var(--orange-100);
+    padding: 12px;
+    color: var(--dark-bg);
+    border-radius: 25% 0 25% 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: var(--orange-500);
+    }
+    &:active {
+      color: var(--orange-500);
     }
   }
 }

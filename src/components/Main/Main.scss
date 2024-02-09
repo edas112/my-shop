@@ -1,0 +1,17 @@
+.main-conteiner {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.action-btn {
+  width: 100%;
+}
+.action-btn button {
+  background: var(--orange-100);
+  padding: 12px;
+  color: var(--dark-bg);
+  border-radius: 25% 0 25% 0;
+}
