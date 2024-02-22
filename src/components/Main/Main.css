@@ -10,10 +10,11 @@
   width: 100%;
   margin-bottom: 2rem;
 }
+
 .action-btn button {
   background: var(--orange-100);
   padding: 12px;
   color: var(--dark-bg);
   border-radius: 25% 0 25% 0;
   margin-left: 2rem;
-}
+}/*# sourceMappingURL=Main.css.map */

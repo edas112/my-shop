@@ -4,7 +4,7 @@
   background: var(--orange-100);
   padding: 2rem;
   height: 15rem;
-  width: 13rem;
+  width: 15rem;
   box-shadow: rgba(238, 166, 9, 0.17) 0px -23px 25px 0px inset,
     rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
     rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
@@ -12,16 +12,16 @@
     rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
   border-radius: 25% 0 25% 0;
   h3 {
-    font-size: 25px;
+    font-size: 20px;
   }
 
   p {
-    font-size: 15px;
+    font-size: 12px;
   }
 
   button {
     background: var(--dark-bg);
-    width: 200px;
+    width: 170px;
     height: 60px;
     color: var(--orange-100);
     box-shadow: rgba(238, 166, 9, 0.17) 0px -23px 25px 0px inset,
@@ -33,4 +33,13 @@
     border-radius: 25% 0 25% 0;
     font-size: 17px;
   }
+}
+
+.favorite-icon {
+  color: black;
+  cursor: pointer;
+}
+
+.favorite-icon-active {
+  color: red;
 }

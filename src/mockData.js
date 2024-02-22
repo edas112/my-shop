@@ -1,4 +1,4 @@
-export const moskData = [
+export const mockData = [
   {
     title: 'Apple',
     description: 'Experience the crisp sweetness of fresh apples.',

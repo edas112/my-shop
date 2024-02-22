@@ -1,3 +1,10 @@
 body {
-  background: #249ea0;
+  background: #249ea0 !important;
+  padding-bottom: 3rem;
+  box-sizing: inherit !important;
+
+  box-sizing: initial;
+  box-sizing: revert;
+
+  box-sizing: unset;
 }

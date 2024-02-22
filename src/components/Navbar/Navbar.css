@@ -1,0 +1,41 @@
+.nav-conteiner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--dark-bg);
+  color: var(--light-font);
+  margin: 2rem;
+  border-radius: 25% 0 25% 0;
+}
+.nav-conteiner h1 {
+  background: var(--orange-100);
+  color: var(--dark-bg);
+  padding: 12px;
+  border-radius: 25% 0 25% 0;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
+}
+ul li {
+  background: var(--orange-100);
+  padding: 12px;
+  color: var(--dark-bg);
+  border-radius: 25% 0 25% 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+ul li a {
+  text-decoration: none;
+  color: var(--dark-bg);
+}
+ul li a:hover {
+  color: var(--orange-300);
+}
+ul li a.active, ul li a:active {
+  color: var(--orange-500);
+}/*# sourceMappingURL=Navbar.css.map */

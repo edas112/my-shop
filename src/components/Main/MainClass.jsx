@@ -1,5 +1,5 @@
 import React from 'react';
-import { moskData } from '../../moskData';
+import { mockData } from '../../mockData';
 // components
 import Card from '../Card/Card';
 
@@ -9,7 +9,7 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      data: moskData,
+      data: mockData,
     };
   }
   render() {
