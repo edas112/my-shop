@@ -9,6 +9,7 @@ import Favorites from './components/Favorites/Favorites';
 
 import './App.scss';
 import SortButton from './components/SortButton/SortButton';
+import Admin from '../src/components/Admin/admin';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/my-card" element={<MyCard />} />
         <Route path="/favorite" element={<Favorites />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </>
   );
