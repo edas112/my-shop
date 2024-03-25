@@ -1,4 +1,4 @@
-export const cgt = {
+export const cfg = {
   API: {
     HOST:
       process.env.NODE_ENV === 'production'

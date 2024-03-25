@@ -1,7 +1,9 @@
 import React, { useState, createContext, useEffect } from 'react';
 
 import { Await } from 'react-router-dom';
+import { cfg } from './AppContext';
 export const AppContext = createContext();
+export { cfg } from '../cfg/cfg';
 
 function AppContextProvider(props) {
   const [data, setData] = useState([]);
@@ -15,9 +17,7 @@ function AppContextProvider(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          'https://api-shop-lvfc.vercel.app/product'
-        );
+        const response = await fetch(`${cfg.API.HOST}/product`);
         console.log('response', response);
         const products = await response.json();
         console.log('data', products);
