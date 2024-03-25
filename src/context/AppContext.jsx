@@ -16,7 +16,7 @@ function AppContextProvider(props) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          'http://api-shop-lvfc.vercel.app/product/'
+          'https://api-shop-lvfc.vercel.app/product'
         );
         console.log('response', response);
         const products = await response.json();
