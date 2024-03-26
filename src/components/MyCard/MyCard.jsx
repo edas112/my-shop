@@ -6,7 +6,7 @@ function MyCard() {
   const [searchValue, setSearchValue] = useState('');
   const { cardData, removeFromCard } = useContext(AppContext);
   return (
-    <main className="conteiner">
+    <main className="my-conteiner">
       <div className="conteiner-input">
         <input
           type="text"
