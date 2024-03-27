@@ -1,7 +1,18 @@
+@use './assets/style/mixins' as *;
+
 .my-conteiner {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
+
+  @include tablet {
+    justify-content: center;
+  }
+
+  @include mobile {
+    justify-content: center;
+    width: 50%;
+  }
 }
