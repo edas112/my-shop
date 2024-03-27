@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import User from '../User/User';
 import './Navbar.scss';
+import AdimUser from '../AdminUser/AdimUser';
 
 function Navbar() {
   return (
@@ -22,8 +23,8 @@ function Navbar() {
           <NavLink to="/admin">Admin</NavLink> 🍎
         </li>
       </ul>
-
-      <User />
+      <AdimUser />
+      {/* <User /> */}
     </nav>
   );
 }
