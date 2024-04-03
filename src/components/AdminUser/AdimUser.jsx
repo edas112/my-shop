@@ -1,161 +1,137 @@
-import React, { useState, useEffect } from 'react';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import { Spinner } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
-import { Col, Row, Container, Button, Alert } from 'react-bootstrap';
+import React, { useState } from 'react';
+import {
+  Spinner,
+  Offcanvas,
+  Form,
+  Row,
+  Col,
+  Button,
+  Alert,
+} from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { cfg } from '../../cfg/cfg';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../AdminUser/AdminUser.scss';
+import useAuth from '../../hooks/useAuth';
 
-function AdimUser() {
-  const [user, setUser] = useState(null);
+function AdminUser() {
   const [show, setShow] = useState(false);
-  const [louding, setLuoding] = useState(true);
-  const [validated, setValidate] = useState(false);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [img, setImg] = useState('');
-  const [status, setStatus] = useState({
-    value: null,
-    message: '',
-  });
-  const [loding, setLoding] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [validated, setValidated] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const { token, setToken } = useAuth();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      setLuoding(true);
-      try {
-        const response = await fetch(
-          'https://jsonplaceholder.typicode.com/users/10'
-        );
-
-        if (!response.ok) throw new Error('Something went wrong!');
-
-        const data = await response.json();
-
-        console.log(data);
-        setUser(data);
-      } catch (error) {
-      } finally {
-        setLuoding(false);
-      }
-    };
-    fetchUser();
-  }, []);
-
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setValidated(false);
+    setUsername('');
+    setPassword('');
+  };
   const handleShow = () => setShow(true);
 
-  //   tikrinti klaidom
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setValidate(true);
+    setValidated(true);
 
     const form = e.currentTarget;
+
     if (!form.checkValidity()) return;
 
-    console.log('created');
-
     try {
-      setLoding(true);
-      const data = {
-        title,
-        description,
-      };
+      setLoading(true);
+      if (error) setError(false);
 
-      if (img.trim()) data.img = img;
-
-      const response = await fetch(`${cfg.API.HOST}/product`, {
+      const response = await fetch(`${cfg.API.HOST}/user/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ username, password }),
       });
-      console.log(response);
-      const product = response.json();
 
-      if (!response.ok) throw new Error(product.error);
-      setStatus({ value: 'sussecc', message: 'Your Log in is success' });
+      if (!response.ok) throw new Error('Username or password incorrect');
+
+      const user = await response.json();
+      console.log(user);
+      if (user.token) {
+        setToken(user.token);
+      }
     } catch (error) {
-      console.log('eror', error.message);
-      setStatus({
-        value: 'danger',
-        message: error.message || 'Something went wrong',
-      });
+      console.log(error.message);
+      setError(true);
     } finally {
-      setLoding(false);
+      setLoading(false);
     }
   };
+
   return (
     <>
-      {louding ? (
-        <Spinner animation="grow" />
-      ) : (
-        <>
-          <div className="user" onClick={handleShow}>
-            {user.username[0]}
-          </div>
-          <Offcanvas
-            className="offcanvas"
-            show={show}
-            onHide={handleClose}
-            placement="end"
-          >
-            <Offcanvas.Header closeButton>
-              <Offcanvas.Title>{user.username}</Offcanvas.Title>
+      <div className="user" onClick={handleShow}>
+        <FontAwesomeIcon icon={faUser} />
+      </div>
+      <Offcanvas show={show} onHide={handleClose} placement="end">
+        {token ? (
+          <>
+            <Offcanvas.Header closeButton closeVariant="white">
+              <Offcanvas.Title>Welcom admin</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>Jus galite sukurti nauja produkta</Offcanvas.Body>
+          </>
+        ) : (
+          <>
+            <Offcanvas.Header closeButton closeVariant="white">
+              <Offcanvas.Title>Login</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <h3>Log In</h3>
+              {error && (
+                <Alert variant="danger">Username or password incorrect</Alert>
+              )}
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Row>
-                  <Form.Group as={Col} md="4" controlId="validationCustom01">
-                    <Form.Label>Name</Form.Label>
+                  <Form.Group as={Col} controlId="validationCustom01">
+                    <Form.Label>Username</Form.Label>
                     <Form.Control
                       required
                       type="text"
-                      placeholder="Title"
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     <Form.Control.Feedback type="invalid">
-                      Title is required
+                      Username is required!
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Row>
-                <Row>
-                  <Form.Group as={Col} md="4" controlId="validationCustom02">
+                <Row style={{ marginTop: '1rem' }}>
+                  <Form.Group as={Col} controlId="validationCustom02">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
-                      className="form-control"
                       required
-                      type="text"
-                      placeholder="Description"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
+                      type="password"
+                      placeholder="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     <Form.Control.Feedback type="invalid">
-                      Password is required
+                      Password is required!
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Row>
 
-                <Button type="submit" disabled={loding}>
-                  Log in
+                <Button type="submit" disabled={loading}>
+                  Login
                 </Button>
-                {loding && <Spinner animation="grow" variant="dark" />}
+                {loading && <Spinner animation="border" variant="primary" />}
               </Form>
-              {status.value && (
-                <Alert variant={status.value}>{status.message}</Alert>
-              )}
             </Offcanvas.Body>
-          </Offcanvas>
-        </>
-      )}
+          </>
+        )}
+      </Offcanvas>
     </>
   );
 }
 
-export default AdimUser;
+export default AdminUser;

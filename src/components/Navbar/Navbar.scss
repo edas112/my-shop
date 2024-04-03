@@ -1,3 +1,5 @@
+@use './../../assets/style/mixins' as *;
+
 .nav-conteiner {
   display: flex;
   justify-content: space-between;
@@ -13,6 +15,10 @@
     color: var(--dark-bg);
     padding: 12px;
     border-radius: 25% 0 25% 0;
+  }
+  @include mobile {
+    justify-content: center;
+    width: 10%;
   }
 }
 
@@ -41,5 +47,10 @@ ul {
         color: var(--orange-500);
       }
     }
+  }
+
+  @include mobile {
+    justify-content: center;
+    width: 100%;
   }
 }
